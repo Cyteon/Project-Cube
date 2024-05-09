@@ -101,11 +101,10 @@ modifiers = Array[Resource("res://addons/gaea/modifiers/3D/modifier_3d.gd")]([Su
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wj3m6"]
 radius = 0.4
-height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7f0t5"]
 radius = 0.4
-height = 1.8
+height = 1.9
 
 [node name="World" type="Node3D"]
 
@@ -155,3 +154,7 @@ shape = SubResource("CapsuleShape3D_7f0t5")
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.542595, 0)
 current = true
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, 6, 0)

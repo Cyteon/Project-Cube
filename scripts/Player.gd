@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@onready var Ray = $Camera3D/RayCast3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -19,6 +20,14 @@ func _unhandled_input(event):
 			$Camera3D.rotate_x(-event.relative.y * 0.01)
 			
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			
+	if event.is_action_pressed("break") and Ray.is_colliding():
+		var collider = Ray.get_collider()
+		
+		collider.set_cell_item(
+			collider.map_to_local(Ray.get_collision_point()), 
+			-1
+		)
 
 func _physics_process(delta):
 	# Add the gravity.
