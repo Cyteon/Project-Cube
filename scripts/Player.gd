@@ -29,7 +29,7 @@ func _unhandled_input(event):
 		
 		if event.is_action_pressed("break"):
 			collider.set_cell_item(
-				collider.map_to_local(# Handle jump.
+				collider.map_to_local(
 					Ray.get_collision_point() - Ray.get_collision_normal()
 					),
 				-1
