@@ -63,11 +63,12 @@ func get_cells(layer: int) -> Array:
 	return _grid[layer].keys()
 
 
-# TODO: Fix the error that shows up here all the time. Trying to get an element from a dictionary that doesn't have said element
 ## Returns [code]true[/code] if the grid has a cell at the given position.
 func has_cell(pos, layer: int) -> bool:
-	
-	return _grid[layer].has(pos)
+	var grid_has_cell = false
+	if _grid.keys().has(layer):
+		grid_has_cell = _grid[layer].has(pos)
+	return grid_has_cell
 
 
 ### Erasing ###
