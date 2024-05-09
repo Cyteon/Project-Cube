@@ -18,6 +18,30 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/gaea/plugin.cfg")
 
+=======
+[input]
+
+up={
+"deadzone": 0.5,
+"events": []
+}
+down={
+"deadzone": 0.5,
+"events": []
+}
+left={
+"deadzone": 0.5,
+"events": []
+}
+right={
+"deadzone": 0.5,
+"events": []
+}
+jump={
+"deadzone": 0.5,
+"events": []
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
