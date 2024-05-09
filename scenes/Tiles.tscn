@@ -1,12 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxanxb3wgqnrt"]
+[gd_scene load_steps=9 format=3 uid="uid://cxanxb3wgqnrt"]
+
+[ext_resource type="Texture2D" uid="uid://bcph7x8bdww06" path="res://textures/blocks/BrightGrass.png" id="1_xwn6b"]
+[ext_resource type="Texture2D" uid="uid://dqkf38ky6qyrb" path="res://textures/blocks/Soil.png" id="2_p2i51"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_va5qa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wofcn"]
 albedo_color = Color(0.39, 1, 0.400167, 1)
+albedo_texture = ExtResource("1_xwn6b")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdb5o"]
-albedo_color = Color(0.309804, 0.227451, 0.168627, 1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f7h13"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b17qy"]
+albedo_texture = ExtResource("2_p2i51")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_obdfq"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sbgeq"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [node name="Tiles" type="Node3D"]
 
@@ -15,11 +30,25 @@ visible = false
 mesh = SubResource("BoxMesh_va5qa")
 surface_material_override/0 = SubResource("StandardMaterial3D_wofcn")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_f7h13")
+
 [node name="Dirt" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("BoxMesh_va5qa")
-surface_material_override/0 = SubResource("StandardMaterial3D_fdb5o")
+surface_material_override/0 = SubResource("StandardMaterial3D_b17qy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Dirt"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dirt/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_obdfq")
 
 [node name="Stone" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("BoxMesh_va5qa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_sbgeq")
