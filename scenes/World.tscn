@@ -120,7 +120,7 @@ generator = NodePath("../HeightmapGenerator3D")
 [node name="HeightmapGenerator3D" type="Node" parent="."]
 script = ExtResource("1_i34af")
 settings = SubResource("Resource_nr5lg")
-chunk_size = Vector3i(8, 8, 8)
+chunk_size = Vector3i(4, 4, 4)
 
 [node name="ChunkLoader3D" type="Node3D" parent="." node_paths=PackedStringArray("generator", "actor")]
 script = ExtResource("7_yotwu")

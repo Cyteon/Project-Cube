@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 ModLoader="*res://scripts/autoloads/ModLoader.gd"
 
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=450
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Project Cube"
