@@ -36,7 +36,7 @@ func _unhandled_input(event):
 			
 			collider.set_cell_item(
 				collider.map_to_local(
-					Ray.get_collision_point() + Ray.get_collision_normal()
+					Ray.get_collision_point()
 					),
 				blockId
 			)

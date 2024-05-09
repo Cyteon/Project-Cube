@@ -124,8 +124,7 @@ generate_on_ready = false
 script = ExtResource("7_yotwu")
 generator = NodePath("../HeightmapGenerator3D")
 actor = NodePath("../Player")
-loading_radius = Vector3i(2, 1, 2)
-update_rate = 10
+loading_radius = Vector3i(8, 4, 8)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("5_u3rog")

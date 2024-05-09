@@ -15,13 +15,17 @@ run/main_scene="res://scenes/World.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ModLoader="*res://scripts/autoloads/ModLoader.gd"
+
 [dotnet]
 
 project/assembly_name="Project Cube"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/uv_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gaea/plugin.cfg")
 
 [input]
 
