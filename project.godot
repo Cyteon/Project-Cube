@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/gaea/plugin.cfg")
 
-=======
 [input]
 
 up={
