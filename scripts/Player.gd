@@ -25,7 +25,9 @@ func _unhandled_input(event):
 		var collider = Ray.get_collider()
 		
 		collider.set_cell_item(
-			collider.map_to_local(Ray.get_collision_point()), 
+			collider.map_to_local(
+				Ray.get_collision_point() - Ray.get_collision_normal()
+				),
 			-1
 		)
 
