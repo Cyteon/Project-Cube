@@ -20,9 +20,22 @@ func _ready():
 				# TODO: do something more with mod
 				
 				if success:
-					var mod_script = load("res://mod/%s/mod.gd" % file.replace(".pck", ""))
+					# FIXME: Not printing mod folder even tough its in the pck that was exported
+					print(DirAccess.get_directories_at(""))
 					
-					print("Author: %s, Name: %s, Version: %s" % [mod_script.author, mod_script.modName, mod_script.version])
+					var config = ConfigFile.new()
+
+					# Load data from a file.
+					print("Loading manifest: res://mod/%s/manifest.cfg" % file.replace(".pck", ""))
+					var err = config.load("res://mod/%s/manifest.cfg" % file.replace(".pck", ""))
+					
+					print(config)
+					
+					var author = config.get_value("mod", "author")
+					var modName = config.get_value("mod", "name")
+					var version = config.get_value("mod", "version")
+					
+					print("Author: %s, Name: %s, Version: %s" % [author, modName, version])
 				
 
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://8xm0l4ia5nxr"]
+[gd_scene load_steps=24 format=3 uid="uid://8xm0l4ia5nxr"]
 
+[ext_resource type="Script" path="res://scripts/World.gd" id="1_7s18o"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/3D/gridmap_gaea_renderer.gd" id="1_26puy"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d.gd" id="1_i34af"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="2_oxvqw"]
@@ -9,6 +10,7 @@
 [ext_resource type="MeshLibrary" uid="uid://sltxssxggdyt" path="res://resources/Tiles.tres" id="5_u3rog"]
 [ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_3d.gd" id="7_yotwu"]
 [ext_resource type="PackedScene" uid="uid://dqykf5oeixq6v" path="res://scenes/Player.tscn" id="9_rpd87"]
+[ext_resource type="Texture2D" uid="uid://dqkf38ky6qyrb" path="res://textures/blocks/Soil.png" id="10_1sg25"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vwdyr"]
 
@@ -100,6 +102,7 @@ falloff_enabled = false
 modifiers = Array[Resource("res://addons/gaea/modifiers/3D/modifier_3d.gd")]([SubResource("Resource_118ee"), SubResource("Resource_fqyeo"), SubResource("Resource_qvwg5")])
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_7s18o")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c4i6t")
@@ -118,13 +121,13 @@ generator = NodePath("../HeightmapGenerator3D")
 script = ExtResource("1_i34af")
 settings = SubResource("Resource_nr5lg")
 chunk_size = Vector3i(8, 8, 8)
-generate_on_ready = false
 
 [node name="ChunkLoader3D" type="Node3D" parent="." node_paths=PackedStringArray("generator", "actor")]
 script = ExtResource("7_yotwu")
 generator = NodePath("../HeightmapGenerator3D")
 actor = NodePath("../Player")
-loading_radius = Vector3i(8, 4, 8)
+loading_radius = Vector3i(3, 3, 3)
+update_rate = 10
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("5_u3rog")
@@ -134,3 +137,49 @@ data = {
 }
 
 [node name="Player" parent="." instance=ExtResource("9_rpd87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1355, 74.0847, 41.2716)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CreatingWorld" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CreatingWorld"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+texture = ExtResource("10_1sg25")
+stretch_mode = 1
+
+[node name="VboxContainer" type="VBoxContainer" parent="CanvasLayer/CreatingWorld"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -38.0
+offset_right = 116.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatingWorldLabel" type="Label" parent="CanvasLayer/CreatingWorld/VboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Creating World"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/CreatingWorld/VboxContainer"]
+layout_mode = 2
+
+[connection signal="chunk_generation_finished" from="HeightmapGenerator3D" to="." method="_on_heightmap_generator_3d_chunk_generation_finished"]
