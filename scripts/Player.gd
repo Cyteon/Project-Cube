@@ -21,15 +21,25 @@ func _unhandled_input(event):
 			
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			
-	if event.is_action_pressed("break") and Ray.is_colliding():
+	if Ray.is_colliding():
 		var collider = Ray.get_collider()
 		
-		collider.set_cell_item(
-			collider.map_to_local(
-				Ray.get_collision_point() - Ray.get_collision_normal()
-				),
-			-1
-		)
+		if event.is_action_pressed("break"):
+			collider.set_cell_item(
+				collider.map_to_local(
+					Ray.get_collision_point() - Ray.get_collision_normal()
+					),
+				-1
+			)
+		elif event.is_action_pressed("place"):
+			var blockId = 2 # TODO: Actual block ID logic
+			
+			collider.set_cell_item(
+				collider.map_to_local(
+					Ray.get_collision_point() + Ray.get_collision_normal()
+					),
+				blockId
+			)
 
 func _physics_process(delta):
 	# Add the gravity.
