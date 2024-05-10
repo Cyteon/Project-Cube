@@ -65,10 +65,9 @@ func get_cells(layer: int) -> Array:
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
 func has_cell(pos, layer: int) -> bool:
-	var grid_has_cell = false
 	if _grid.keys().has(layer):
-		grid_has_cell = _grid[layer].has(pos)
-	return grid_has_cell
+		return _grid[layer].has(pos)
+	return false
 
 
 ### Erasing ###
