@@ -13,5 +13,13 @@ func _process(_delta):
 
 
 func _on_heightmap_generator_3d_chunk_generation_finished(chunk_position):
+	# TODO: Load blocks based on chunk pos
+	# TODO: Load blocks based on chunk pos
+	for block in modifiedBlocks:
+		$GridMap.set_cell_item(
+			block,
+			modifiedBlocks[block]
+		)
+	
 	$CanvasLayer/CreatingWorld.hide()
 	# TODO: Make progressbar do something
