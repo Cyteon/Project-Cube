@@ -17,5 +17,5 @@ func _process(_delta):
 	if status == ResourceLoader.THREAD_LOAD_LOADED:
 		get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(targetScene))
 	elif status == ResourceLoader.THREAD_LOAD_FAILED:
-		# TODO: Return to menu
+		# TODO: Return to menu when failed
 		$VBoxContainer/Label.text = "World Loading Failed"

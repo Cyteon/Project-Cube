@@ -137,7 +137,7 @@ data = {
 }
 
 [node name="Player" parent="." instance=ExtResource("9_rpd87")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1355, 74.0847, 41.2716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1355, 78.7926, 41.2716)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

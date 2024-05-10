@@ -27,22 +27,25 @@ func _unhandled_input(event):
 	if Ray.is_colliding():
 		var collider = Ray.get_collider()
 		
-		if event.is_action_pressed("break"):
-			collider.set_cell_item(
-				collider.map_to_local(
-					Ray.get_collision_point() - Ray.get_collision_normal()
-					),
-				-1
-			)
-		elif event.is_action_pressed("place"):
-			var blockId = 2 # TODO: Actual block ID logic
+		if collider is GridMap:
+			var normal = Ray.get_collision_normal()
 			
-			collider.set_cell_item(
-				collider.map_to_local(
-					Ray.get_collision_point()
-					),
-				blockId
-			)
+			if event.is_action_pressed("break"):
+				collider.set_cell_item(
+					collider.map_to_local(
+						Ray.get_collision_point() - normal*0.5
+						),
+					-1
+				)
+			elif event.is_action_pressed("place"):
+				var blockId = 2 # TODO: Actual block ID logic
+				
+				collider.set_cell_item(
+					collider.map_to_local(
+						Ray.get_collision_point() + normal*0.5
+						),
+					blockId
+				)
 
 func _physics_process(delta):
 	# gravity
