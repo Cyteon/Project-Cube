@@ -141,6 +141,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1355, 78.7926, 41.2716)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="FPSCounter" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 23.0
+text = "FPS: 123"
+
 [node name="CreatingWorld" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
