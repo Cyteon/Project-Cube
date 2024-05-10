@@ -31,21 +31,30 @@ func _unhandled_input(event):
 			var normal = Ray.get_collision_normal()
 			
 			if event.is_action_pressed("break"):
+				var mapCords = collider.map_to_local(
+					Ray.get_collision_point() - normal*0.5
+					)
+				
 				collider.set_cell_item(
-					collider.map_to_local(
-						Ray.get_collision_point() - normal*0.5
-						),
+					mapCords,
 					-1
 				)
+				
+				$"..".modifiedBlocks[mapCords] = -1
+				
 			elif event.is_action_pressed("place"):
 				var blockId = 2 # TODO: Actual block ID logic
 				
+				var mapCords = collider.map_to_local(
+					Ray.get_collision_point() + normal*0.5
+					)
+				
 				collider.set_cell_item(
-					collider.map_to_local(
-						Ray.get_collision_point() + normal*0.5
-						),
+					mapCords,
 					blockId
 				)
+				
+				$"..".modifiedBlocks[mapCords] = blockId
 
 func _physics_process(delta):
 	# gravity
