@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://8xm0l4ia5nxr"]
+[gd_scene load_steps=25 format=3 uid="uid://8xm0l4ia5nxr"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_7s18o"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/3D/gridmap_gaea_renderer.gd" id="1_26puy"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_3d.gd" id="7_yotwu"]
 [ext_resource type="PackedScene" uid="uid://dqykf5oeixq6v" path="res://scenes/Player.tscn" id="9_rpd87"]
 [ext_resource type="Texture2D" uid="uid://dqkf38ky6qyrb" path="res://textures/blocks/Soil.png" id="10_1sg25"]
+[ext_resource type="Texture2D" uid="uid://d2iybtx0urx8l" path="res://textures/ui/HotBarSelected.png" id="12_sf0w7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vwdyr"]
 
@@ -148,6 +149,7 @@ offset_bottom = 23.0
 text = "FPS: 123"
 
 [node name="CreatingWorld" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,5 +189,74 @@ text = "Creating World"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/CreatingWorld/VboxContainer"]
 layout_mode = 2
+
+[node name="HotBarContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -37.0
+offset_right = 164.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="1" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="2" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="3" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="4" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="5" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="6" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="7" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="8" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="9" type="ColorRect" parent="CanvasLayer/HotBarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+color = Color(0, 0, 0, 0.415686)
+
+[node name="SelectedMarker" type="TextureRect" parent="CanvasLayer"]
+offset_left = 236.0
+offset_top = 413.0
+offset_right = 236.0
+offset_bottom = 413.0
+texture = ExtResource("12_sf0w7")
+expand_mode = 1
+stretch_mode = 2
 
 [connection signal="chunk_generation_finished" from="HeightmapGenerator3D" to="." method="_on_heightmap_generator_3d_chunk_generation_finished"]

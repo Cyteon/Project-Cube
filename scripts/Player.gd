@@ -1,15 +1,20 @@
 extends CharacterBody3D
 
 @onready var Ray = $Camera3D/RayCast3D
+@onready var HotBarContainer = $"../CanvasLayer/HotBarContainer"
 
 const WALKING_SPEED : float = 3.0
 const JUMP_VELOCITY : float = 6.0
 const ACCEL : float = 0.35
 const GRAVITY : float = 15.0
 
-var input_dir : Vector2 = Vector2(0, 0)
-var jump_input_buffer : int = 0
-var coyote_buffer : int = 0
+var inputDir : Vector2 = Vector2(0, 0)
+var jumpInputBuffer : int = 0
+var coyoteBuffer : int = 0
+
+var currentHotBarSlot = 1
+
+var hotBarContent = {}
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -62,36 +67,61 @@ func _physics_process(delta):
 		velocity.y -= GRAVITY * delta
 	
 	# tick down all the buffers by one frame
-	if coyote_buffer > 0:
-			coyote_buffer -= 1
+	if coyoteBuffer > 0:
+			coyoteBuffer -= 1
 	
-	if jump_input_buffer > 0:
-		jump_input_buffer -= 1
+	if jumpInputBuffer > 0:
+		jumpInputBuffer -= 1
 	
 	# get movement dir
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (transform.basis * Vector3(inputDir.x, 0, inputDir.y)).normalized()
 	# interpolate velocity towards movement dir * speed
 	velocity.x = lerp(velocity.x, direction.x * WALKING_SPEED, ACCEL)
 	velocity.z = lerp(velocity.z, direction.z * WALKING_SPEED, ACCEL)
 	move_and_slide()
 
+func get_number_input():
+	if Input.is_action_just_pressed("hotbar1"):
+		currentHotBarSlot = 1
+	elif Input.is_action_just_pressed("hotbar2"):
+		currentHotBarSlot = 2
+	elif Input.is_action_just_pressed("hotbar3"):
+		currentHotBarSlot = 3
+	elif Input.is_action_just_pressed("hotbar4"):
+		currentHotBarSlot = 4
+	elif Input.is_action_just_pressed("hotbar5"):
+		currentHotBarSlot = 5
+	elif Input.is_action_just_pressed("hotbar6"):
+		currentHotBarSlot = 6
+	elif Input.is_action_just_pressed("hotbar7"):
+		currentHotBarSlot = 7
+	elif Input.is_action_just_pressed("hotbar8"):
+		currentHotBarSlot = 8
+	elif Input.is_action_just_pressed("hotbar9"):
+		currentHotBarSlot = 9
+
 func _process(_delta):
-	input_dir = Input.get_vector("left", "right", "up", "down")
+	inputDir = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_just_pressed("jump"):
 		# 7 frames of buffer time to hit jump early before hitting the floor
-		jump_input_buffer = 7
+		jumpInputBuffer = 7
 		
 		# check if player was on floor within the last 7 frames, if yes, jump
-		if coyote_buffer > 0:
+		if coyoteBuffer > 0:
 			jump()
 	
 	if is_on_floor():
-		coyote_buffer = 7
+		coyoteBuffer = 7
 		# check if jump has been pressed within the last 7 frames, if yes, jump
-		if jump_input_buffer > 0:
+		if jumpInputBuffer > 0:
 			jump()
+			
+			
+	get_number_input()
+	var hotBarSlotPos = HotBarContainer.get_child(currentHotBarSlot-1).global_position
+	$"../CanvasLayer/SelectedMarker".position = hotBarSlotPos
 
 func jump():
 	velocity.y = JUMP_VELOCITY
-	coyote_buffer = 0
-	jump_input_buffer = 0
+	coyoteBuffer = 0
+	jumpInputBuffer = 0
